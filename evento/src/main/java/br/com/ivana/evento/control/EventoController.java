@@ -3,14 +3,12 @@ package br.com.ivana.evento.control;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller	
+@Controller
 public class EventoController {
-	
-	@RequestMapping("/cadastrarEvento")
+
+	@RequestMapping("/cadastraEvento")
 	public String form() {
-		return "evento/formEvento";
 		
+		return "evento/formEvento";
 	}
-	
-	
 }
