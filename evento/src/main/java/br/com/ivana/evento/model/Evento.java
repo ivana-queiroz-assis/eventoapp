@@ -32,7 +32,8 @@ public class Evento implements Serializable{
 	@NotEmpty
 	private String horario;
 	
-	
+	@OneToMany
+	private List<Convidado> listaConvidados;
 	
 	public long getCodigo() {
 		return codigo;
