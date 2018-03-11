@@ -11,7 +11,7 @@
 	
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
+	<link rel="stylesheet" href="materialize/style/style.css"/>
 	<title>Eventos App</title>
 	</head>
 	<body>
@@ -21,7 +21,7 @@
 			    <div class="nav-wrapper">
 			      <a href="#" class="brand-logo">Evento</a>
 			      <ul id="nav-mobile" class="right hide-on-med-and-down">
-			        <li><a href="/evento" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i> Lista de Eventos</a></li>
+			        <li><a href="/eventos" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i> Lista de Eventos</a></li>
 			       
 			      </ul>
 			    </div>
@@ -29,35 +29,54 @@
 		</header>
 		<br/><br/>
 		
-	<div th:each="evento: ${evento}" class="container">
+	<div th:each="evento: ${evento}" class="container detalhesEvento">
 		<div class="row">
 			<p> Nome: <span th:text="${evento.nome}"></span></p>
 			<p> Local:<span th:text="${evento.local}"></span></p>
 			<p> Data:<span th:text="${evento.data}"></span></p>
 			<p> Horario:<span th:text="${evento.horario}"></span></p>
+			
 		</div>
-		
+	</div>
+	<th:block th:include="mensagem"></th:block>
+
+	<div class="container formConvidado">
 		<form method="post">
-			<label class="waves-effect waves-light btn" >Convidados do Evento</label><br/><br/><br/>
+			<label class="waves-effect waves-light btn" >Novo convidado</label><br/><br/><br/>
 			Nome: <input type="text" value="" name="nome"/>
 			RG:<input type="text" value="" name="rg"/>
+			
 			<button class="waves-effect waves-light btn" type="submit">Adicionar</button>
 			
 		</form>
-	</div>
-	<br/><br/><br/><br/>
-	<h5 class="waves-effect waves-light btn">Lista de convidados</h5>
-	<div class="container" th:each="convidado : ${listaConvidados}">
 	
-		<div class="row">
-			<div class="input-field col s6">
-				<p><span th:text="${convidado.nome}"></span></p>
-			</div>
-			<div class="input-field col s3">
-				<p><span th:text="${convidado.rg}"></span></p>
-			</div>
-		</div>
+		<br/><br/><br/><br/>
+		
 	</div>
+	
+	<div class="container">
+		<h5 class="waves-effect waves-light btn">Lista de convidados</h5>
+	</div>
+	<table class="container tabelaConvidada">
+		
+		<thead>
+			
+			<tr>
+				<th>Nome do convidado</th>
+				<th>RG</th>
+				<th>Deletar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="convidado:${listaConvidados}">
+				<td><span th:text="${convidado.nome}"></span></td>
+				<td><span th:text="${convidado.rg}"></span></td>
+				<td><a class="waves-effect waves-light btn-small" th:href="${(#mvc.url('EC#deletarConvidado').arg(0, convidado.rg)).build()}"><i class="material-icons left">delete</i></a></td>
+			</tr>
+			
+		</tbody>
+	</table>	
+	
 	
 		<!--Import jQuery before materialize.js-->
 		<script type="text/javascript"

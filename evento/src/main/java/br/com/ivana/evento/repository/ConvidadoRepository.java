@@ -9,4 +9,5 @@ public interface  ConvidadoRepository extends CrudRepository<Convidado, String>{
 	
 	Iterable<Convidado> findByEvento(Evento e);
 
+	Convidado findByRg(String rg);
 }
